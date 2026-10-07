@@ -13,44 +13,57 @@ public class Principal {
 		CalculadoraService servico = new CalculadoraService();
 		Scanner scanner = new Scanner(System.in);
 
-		System.out.println("1 - Soma");
-		System.out.println("2 - Subtração");
-		System.out.println("3 - Multiplicação");
-		System.out.println("4 - Dividir");
-		int opcao = lerInt(scanner, "Escolha a operação: ");
-		
-		
-		Operacao operacao;
-		switch (opcao) {
-		case 1:
-			operacao = Operacao.SOMA;
-			break;
+		int opcao = -1;
 
-		case 2:
-			operacao = Operacao.SUBTRACAO;
-			break;
+		while (opcao != 0) {
 
-		case 3:
-			operacao = Operacao.MULTIPLICACAO;
-			break;
-		case 4:
-			operacao = Operacao.DIVISAO;
-			break;
-		default:
-			System.out.println("Opção Inválida");
-			return;
+			System.out.println("1 - Soma");
+			System.out.println("2 - Subtração");
+			System.out.println("3 - Multiplicação");
+			System.out.println("4 - Dividir");
+			System.out.println("0 - Encerrar calculadora");
+			opcao = lerInt(scanner, "Escolha a operação: ");
+
+			if (opcao == 0) {
+				System.out.println("Calculadora encerrada.");
+				break;
+			}
+
+			Operacao operacao;
+			switch (opcao) {
+			case 1:
+				operacao = Operacao.SOMA;
+				break;
+
+			case 2:
+				operacao = Operacao.SUBTRACAO;
+				break;
+
+			case 3:
+				operacao = Operacao.MULTIPLICACAO;
+				break;
+			case 4:
+				operacao = Operacao.DIVISAO;
+				break;
+			default:
+				System.out.println("Opção Inválida");
+				continue;
+			}
+
+			double a = lerDouble(scanner, "Digite o primeiro número: ");
+			double b = lerDouble(scanner, "Digite o segundo número: ");
+
+			try {
+				double resultado = servico.calcular(operacao, a, b);
+				System.out.println("Resultado: " + resultado);
+			} catch (ArithmeticException e) {
+				System.out.println("Erro: " + e.getMessage());
+			}
+
 		}
 
-		double a = lerDouble(scanner, "Digite o primeiro número: ");
-		double b = lerDouble(scanner, "Digite o segundo número: ");
-
-		try {
-			double resultado = servico.calcular(operacao, a, b);
-			System.out.println("Resultado: " + resultado);
-		} catch (ArithmeticException e) {
-			System.out.println("Erro: " + e.getMessage());
-		}
 		scanner.close();
+
 	}
 
 	private static double lerDouble(Scanner scanner, String mensagem) {
