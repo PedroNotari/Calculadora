@@ -1,5 +1,6 @@
 package calculadora.ui;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import calculadora.model.Operacao;
@@ -16,9 +17,9 @@ public class Principal {
 		System.out.println("2 - Subtração");
 		System.out.println("3 - Multiplicação");
 		System.out.println("4 - Dividir");
-		System.out.print("Escolha a operação: ");
-		int opcao = scanner.nextInt();
-
+		int opcao = lerInt(scanner, "Escolha a operação: ");
+		
+		
 		Operacao operacao;
 		switch (opcao) {
 		case 1:
@@ -40,19 +41,39 @@ public class Principal {
 			return;
 		}
 
-		System.out.print("Digite o primeiro número: ");
-		double a = scanner.nextDouble();
+		double a = lerDouble(scanner, "Digite o primeiro número: ");
+		double b = lerDouble(scanner, "Digite o segundo número: ");
 
-		System.out.print("Digite o segundo número: ");
-		double b = scanner.nextDouble();
-
-	try {
-		double resultado = servico.calcular(operacao, a, b);
-		System.out.println("Resultado: " + resultado);
-	} catch (ArithmeticException e) {
-		System.out.println("Erro: " + e.getMessage());
-	}
+		try {
+			double resultado = servico.calcular(operacao, a, b);
+			System.out.println("Resultado: " + resultado);
+		} catch (ArithmeticException e) {
+			System.out.println("Erro: " + e.getMessage());
+		}
 		scanner.close();
 	}
 
+	private static double lerDouble(Scanner scanner, String mensagem) {
+		while (true) {
+			System.out.print(mensagem);
+			try {
+				return scanner.nextDouble();
+			} catch (InputMismatchException e) {
+				System.out.println("Entrada Inválida. Digite um número.");
+				scanner.nextLine();
+			}
+		}
+	}
+
+	private static int lerInt(Scanner scanner, String mensagem) {
+		while (true) {
+			System.out.print(mensagem);
+			try {
+				return scanner.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Entrada Inválida. Digite um número.");
+				scanner.nextLine();
+			}
+		}
+	}
 }
