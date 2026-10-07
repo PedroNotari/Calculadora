@@ -46,9 +46,12 @@ public class Principal {
 		System.out.print("Digite o segundo número: ");
 		double b = scanner.nextDouble();
 
+	try {
 		double resultado = servico.calcular(operacao, a, b);
 		System.out.println("Resultado: " + resultado);
-
+	} catch (ArithmeticException e) {
+		System.out.println("Erro: " + e.getMessage());
+	}
 		scanner.close();
 	}
 
