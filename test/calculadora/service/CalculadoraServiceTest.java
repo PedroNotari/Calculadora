@@ -1,6 +1,7 @@
 package calculadora.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,4 +24,13 @@ class CalculadoraServiceTest {
 		assertEquals(6.0, servico.multiplicar(2, 3));
 	}
 
+	@Test
+	void deveDividirDoisNumeros() {
+		assertEquals(2.5, servico.dividir(5, 2));
+	}
+
+	@Test
+	void deveLancarExcecaoNaDivisaoPorZero() {
+		assertThrows(ArithmeticException.class, () -> servico.dividir(10, 0));
+	}
 }
