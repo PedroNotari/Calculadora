@@ -11,6 +11,7 @@ Projeto Java de uma calculadora para prática de programação, criado com o int
 ## Tecnologias
 
 - Java
+- JUnit 5
 - Eclipse
 - Git e GitHub
 
@@ -32,6 +33,5 @@ src/
 ## Melhorias
 
 - Adicionar mais funcionalidades, progredindo para uma futura calculadora científica.
-- Testes unitários com JUnit.
 - Criar persistência de dados, salvando cálculos já feitos.
 - Criar interface gráfica para melhor visualização de uma calculadora.
